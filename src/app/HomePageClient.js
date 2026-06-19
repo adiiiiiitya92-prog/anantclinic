@@ -96,13 +96,14 @@ export default function Home({ siteContent, reviews }) {
             alt="Dr. Om Dwivedi at Anant Clinic Nagpur" 
             fill 
             priority
+            unoptimized
             className="object-cover object-[78%_center] lg:object-right scale-[1.15] translate-x-[-3%] translate-y-[6%]" 
           />
         </div>
 
         {/* Gradient Overlay for Text Readability: Low transparency on the left (solid), fading to transparent on the right */}
-        {/* Mobile overlay has lower opacity (75%) and subtle blur to show background image more clearly */}
-        <div className="absolute inset-0 bg-white/75 backdrop-blur-[1.5px] sm:bg-white/70 lg:backdrop-blur-none lg:bg-transparent lg:bg-[linear-gradient(to_right,#f8fafc_25%,rgba(248,250,252,0.95)_35%,rgba(248,250,252,0.6)_48%,rgba(248,250,252,0)_60%)] z-10"></div>
+        {/* Mobile overlay has lower opacity (75%) to show background image clearly without any blur */}
+        <div className="absolute inset-0 bg-white/75 sm:bg-white/70 lg:bg-transparent lg:bg-[linear-gradient(to_right,#f8fafc_25%,rgba(248,250,252,0.95)_35%,rgba(248,250,252,0.6)_48%,rgba(248,250,252,0)_60%)] z-10"></div>
         
         {/* Decorative elements for premium feel */}
         <div className="absolute top-12 left-12 w-72 h-72 rounded-full bg-primary/5 blur-3xl pointer-events-none z-10 hidden lg:block"></div>
