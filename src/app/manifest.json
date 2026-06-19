@@ -1,0 +1,23 @@
+{
+  "name": "Anant Skin & Piles Relief Center",
+  "short_name": "Anant Clinic",
+  "description": "Anant Skin & Piles Relief Center - Dr. Om Dwivedi",
+  "start_url": "/login",
+  "display": "standalone",
+  "background_color": "#0F4C5C",
+  "theme_color": "#0F4C5C",
+  "icons": [
+    {
+      "src": "/assets/logo anant.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/logo anant.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

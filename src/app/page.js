@@ -1,66 +1,59 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { db } from '@/lib/firebase';
+import HomePageClient from './HomePageClient';
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+export const revalidate = 0; // Ensures the page fetches fresh content on demand
+
+export default async function Home() {
+  // Fetch site content from Firestore
+  let contentMap = {};
+  try {
+    const siteContentDoc = await db.collection('site').doc('content').get();
+    if (siteContentDoc.exists) {
+      contentMap = siteContentDoc.data();
+    }
+  } catch (error) {
+    console.error("Firestore site content fetch error:", error);
+  }
+
+  // Provide sensible defaults in case DB is empty
+  const defaultContent = {
+    doctor_name: "Dr. Om Dwivedi",
+    doctor_qualifications: "B.A.M.S, CSD (Ayurveda & Skin Specialist)",
+    doctor_bio: "Dr. Om Dwivedi stands at the forefront of Ayurvedic medicine and skin care in Nagpur, leading with a profound commitment to painless healing and medical excellence.",
+    clinic_phone: "7385260597",
+    clinic_email: "dwivediom04575@gmail.com",
+  };
+
+  // Merge DB content over defaults
+  const finalContent = { ...defaultContent, ...contentMap };
+
+  // Fetch reviews from Firestore
+  let reviews = [];
+  try {
+    const reviewsSnap = await db.collection('reviews').orderBy('createdAt', 'desc').get();
+    reviews = reviewsSnap.docs.map(doc => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        patientName: data.patientName,
+        initials: data.initials,
+        content: data.content,
+        rating: data.rating,
+        createdAt: data.createdAt?.toDate?.() ? data.createdAt.toDate().toISOString() : (data.createdAt || new Date().toISOString())
+      };
+    });
+  } catch (error) {
+    console.error("Firestore review fetch error:", error);
+  }
+
+  // Pre-seed default reviews if the DB is empty
+  const defaultReviews = [
+    { id: '1a', initials: 'RK', patientName: 'Rajesh Kumar', rating: 5, content: 'I was struggling with chronic piles for more than 5 years and consulted several doctors. The Ayurvedic treatment given by Dr. Om Dwivedi worked like magic! The pain stopped within days. Best doctor in Nagpur.' },
+    { id: '2b', initials: 'SP', patientName: 'Sneha Patil', rating: 5, content: 'Excellent skin clinic. My eczema is completely cured now. The medicines are affordable and don\'t have side effects. Dr. Om Dwivedi is very professional and patient.' },
+    { id: '3c', initials: 'AS', patientName: 'Amit Sharma', rating: 5, content: 'The clinic and staff are extremely helpful. Booking was smooth. Highly recommend for any chronic disease treatments using holistic methods.' },
+  ];
+
+  const finalReviews = reviews.length > 0 ? reviews : defaultReviews;
+
+  return <HomePageClient siteContent={finalContent} reviews={finalReviews} />;
 }
