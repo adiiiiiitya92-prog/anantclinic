@@ -294,10 +294,10 @@ export default function AppointmentsDashboard({ initialAppointments }) {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           
           {/* Navigation Tabs */}
-          <div className="flex border-b border-slate-100 lg:border-none p-1 bg-slate-50 rounded-xl w-fit">
+          <div className="flex overflow-x-auto max-w-full p-1 bg-slate-50 rounded-xl w-full lg:w-fit gap-1 scrollbar-none snap-x snap-mandatory">
             <button
               onClick={() => setActiveTab('pending')}
-              className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${
+              className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 shrink-0 snap-start ${
                 activeTab === 'pending'
                   ? 'bg-white text-primary shadow-sm'
                   : 'text-slate-500 hover:text-slate-900'
@@ -313,7 +313,7 @@ export default function AppointmentsDashboard({ initialAppointments }) {
             </button>
             <button
               onClick={() => setActiveTab('completed')}
-              className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${
+              className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 shrink-0 snap-start ${
                 activeTab === 'completed'
                   ? 'bg-white text-primary shadow-sm'
                   : 'text-slate-500 hover:text-slate-900'
@@ -329,7 +329,7 @@ export default function AppointmentsDashboard({ initialAppointments }) {
             </button>
             <button
               onClick={() => setActiveTab('all')}
-              className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${
+              className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 shrink-0 snap-start ${
                 activeTab === 'all'
                   ? 'bg-white text-primary shadow-sm'
                   : 'text-slate-500 hover:text-slate-900'

@@ -27,3 +27,13 @@
 .glass-effect-dark {
   @apply bg-slate-900/80 backdrop-blur-md border border-slate-800 shadow-xl;
 }
+
+/* Hide scrollbars custom utility */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
