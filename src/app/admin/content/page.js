@@ -54,15 +54,15 @@ export default async function ContentPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Site Content Management</h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Site Content Management</h1>
           <p className="text-slate-500 mt-2">Edit the text shown on your main website here.</p>
         </div>
         
         {/* Logout Button */}
-        <form action="/api/auth/logout" method="POST">
-          <button type="submit" className="flex items-center gap-2 px-5 py-2.5 bg-red-50 hover:bg-red-100 text-red-600 font-bold rounded-xl transition-colors shadow-sm border border-red-200">
+        <form action="/api/auth/logout" method="POST" className="w-full sm:w-auto">
+          <button type="submit" className="flex items-center justify-center gap-2 w-full px-5 py-2.5 bg-red-50 hover:bg-red-100 text-red-600 font-bold rounded-xl transition-colors shadow-sm border border-red-200 cursor-pointer">
             <LogOut className="w-4 h-4" />
             Secure Logout
           </button>

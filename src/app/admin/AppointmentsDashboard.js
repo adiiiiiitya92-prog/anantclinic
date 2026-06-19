@@ -204,7 +204,7 @@ export default function AppointmentsDashboard({ initialAppointments }) {
       {/* Header Area */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2.5">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2.5">
             Appointments Dashboard
           </h1>
           <p className="text-slate-500 mt-1 font-medium">Manage and track your patient visits and treatment schedules.</p>

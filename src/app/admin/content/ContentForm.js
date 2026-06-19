@@ -115,10 +115,10 @@ export default function ContentForm({ initialData }) {
 
       </div>
 
-      <div className="pt-8 border-t border-slate-100 flex items-center justify-between">
-        <div>
+      <div className="pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+        <div className="text-center sm:text-left">
           {saveStatus === 'success' && (
-            <p className="text-green-600 font-bold flex items-center gap-2 animate-in fade-in slide-in-from-bottom-2">
+            <p className="text-green-600 font-bold flex items-center justify-center sm:justify-start gap-2 animate-in fade-in slide-in-from-bottom-2">
               <CheckCircle2 className="w-5 h-5" /> Successfully saved to database!
             </p>
           )}
@@ -129,7 +129,7 @@ export default function ContentForm({ initialData }) {
         <button 
           type="submit" 
           disabled={isSaving}
-          className="flex items-center gap-2 px-8 py-3.5 bg-primary hover:bg-primary-light text-white font-bold rounded-xl shadow-lg shadow-primary/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-0.5"
+          className="flex items-center justify-center gap-2 px-8 py-3.5 bg-primary hover:bg-primary-light text-white font-bold rounded-xl shadow-lg shadow-primary/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-0.5 w-full sm:w-auto cursor-pointer"
         >
           <Save className="w-5 h-5" />
           {isSaving ? 'Saving...' : 'Save Changes'}
