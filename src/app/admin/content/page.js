@@ -59,14 +59,6 @@ export default async function ContentPage() {
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Site Content Management</h1>
           <p className="text-slate-500 mt-2">Edit the text shown on your main website here.</p>
         </div>
-        
-        {/* Logout Button */}
-        <form action="/api/auth/logout" method="POST" className="w-full sm:w-auto">
-          <button type="submit" className="flex items-center justify-center gap-2 w-full px-5 py-2.5 bg-red-50 hover:bg-red-100 text-red-600 font-bold rounded-xl transition-colors shadow-sm border border-red-200 cursor-pointer">
-            <LogOut className="w-4 h-4" />
-            Secure Logout
-          </button>
-        </form>
       </div>
       
       <div className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-200">

@@ -1,5 +1,6 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
+import 'firebase/compat/auth';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyBa00zLQrvgCAq6i3sEdcTIpPvIZfpjhNE",
@@ -11,6 +12,7 @@ const firebaseConfig = {
 };
 
 let db;
+let auth;
 
 try {
   if (!firebase.apps.length) {
@@ -18,6 +20,7 @@ try {
     console.log("Firebase Client SDK initialized successfully (anantclinic-5ed24).");
   }
   db = firebase.firestore();
+  auth = firebase.auth();
 } catch (error) {
   console.error("Error initializing Firebase:", error);
   
@@ -45,6 +48,12 @@ try {
   db = {
     collection: () => mockCollection
   };
+
+  auth = {
+    signInWithEmailAndPassword: async () => { throw new Error("Firebase Auth is disabled in fallback mode"); },
+    signOut: async () => {},
+    onAuthStateChanged: () => () => {}
+  };
 }
 
-export { db };
+export { db, auth };

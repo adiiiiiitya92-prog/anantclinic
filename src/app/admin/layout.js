@@ -3,10 +3,23 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LayoutDashboard, Users, FileText, LogOut, Menu, X, Activity } from 'lucide-react';
+import { auth } from '@/lib/firebase';
 
 export default function AdminLayout({ children }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    if (!confirm('Are you sure you want to log out?')) return;
+    try {
+      await auth.signOut();
+      await fetch('/api/auth/logout', { method: 'POST' });
+      window.location.href = '/login';
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
 
   const navLinks = [
     { name: 'Appointments', href: '/admin', icon: LayoutDashboard },
@@ -72,15 +85,13 @@ export default function AdminLayout({ children }) {
         </nav>
 
         <div className="p-4 border-t border-slate-800">
-          <form action="/api/auth/logout" method="POST">
-            <button 
-              type="submit" 
-              className="w-full flex items-center gap-3 px-4 py-3 text-red-400 hover:bg-red-500/10 hover:text-red-300 rounded-xl transition-colors font-medium"
-            >
-              <LogOut className="w-5 h-5" />
-              Logout
-            </button>
-          </form>
+          <button 
+            onClick={handleLogout}
+            className="w-full flex items-center gap-3 px-4 py-3 text-red-400 hover:bg-red-500/10 hover:text-red-300 rounded-xl transition-colors font-medium cursor-pointer"
+          >
+            <LogOut className="w-5 h-5" />
+            Logout
+          </button>
         </div>
       </aside>
 
