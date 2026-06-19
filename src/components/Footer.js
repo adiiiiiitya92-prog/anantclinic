@@ -75,7 +75,10 @@ export default function Footer() {
       <div className="border-t border-slate-800 bg-slate-950 py-6 text-sm text-slate-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p>&copy; {new Date().getFullYear()} Anant Skin & Piles Relief Center. All rights reserved.</p>
-          <Link href="/login" className="hover:text-slate-300 transition-colors">Admin Login</Link>
+          <p className="text-slate-500">
+            Designed &amp; Developed by{' '}
+            <span className="text-slate-400 font-medium">Setu Solution</span>
+          </p>
         </div>
       </div>
     </footer>
